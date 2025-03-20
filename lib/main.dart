@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'onboarding0.dart';
+import 'SplashScreen.dart';
 
 void main() {
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
-    home: Onboarding0(),
+    home: SplashScreen(),
   ));
 }
