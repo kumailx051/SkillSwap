@@ -51,7 +51,7 @@ class WelcomeScreen extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => UploadProfileScreen()),
+                          builder: (context) => ProfileSetupScreen()),
                     );
                   },
                   style: ElevatedButton.styleFrom(
