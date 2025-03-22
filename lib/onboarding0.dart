@@ -77,12 +77,15 @@ class _OnboardingScreenState extends State<Onboarding0>
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
-            colors: [
-              Color(0xFF1A0A1F), // Very dark purple at top (almost black)
-              Color(0xFF2D0D2E), // Dark purple in the middle-top
-              Color(0xFF3D1A38), // Medium-dark purple in the middle
-              Color(0xFF4A1F3E), // Medium purple at the bottom
-            ],
+  colors: [
+
+  Color(0xFF1C2A1A), // Very dark green at top (almost black-green)
+  Color(0xFF2E472D), // Dark green in the middle-top
+  Color(0xFF3C6037), // Medium-dark green in the middle
+  Color(0xFF739270), // Medium green at the bottom
+],
+
+
             stops: [0.0, 0.3, 0.6, 1.0],
           ),
         ),
@@ -101,8 +104,8 @@ class _OnboardingScreenState extends State<Onboarding0>
                     scale: _logoAnimation,
                     child: Image.asset(
                       'assets/logo.png',
-                      width: 150,
-                      height: 150,
+                      width: 130,
+                      height: 140,
                     ),
                   ),
                 ),

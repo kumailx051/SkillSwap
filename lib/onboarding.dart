@@ -23,9 +23,9 @@ class OnboardingScreen3 extends StatelessWidget {
             // Image Grid at the Top
             Column(
               children: [
-                imageRow(['assets/1.png', 'assets/2.jpg']),
+                ImageRow(imagePaths: ['assets/1.png', 'assets/2.jpg']),
                 SizedBox(height: 10),
-                imageRow(['assets/3.jpg', 'assets/4.png']),
+                ImageRow(imagePaths: ['assets/3.jpg', 'assets/4.png']),
               ],
             ),
 
@@ -105,7 +105,7 @@ class OnboardingScreen3 extends StatelessWidget {
                           TextSpan(
                             text: "Login",
                             style: TextStyle(
-                                color: const Color.fromARGB(255, 3, 3, 3),
+                                color: Colors.white,
                                 fontWeight: FontWeight.bold),
                           ),
                         ],
@@ -120,9 +120,16 @@ class OnboardingScreen3 extends StatelessWidget {
       ),
     );
   }
+}
 
-  // Function to create a row of images
-  Widget imageRow(List<String> imagePaths) {
+// Separate StatelessWidget for ImageRow
+class ImageRow extends StatelessWidget {
+  final List<String> imagePaths;
+
+  const ImageRow({Key? key, required this.imagePaths}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: imagePaths.map((path) {

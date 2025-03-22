@@ -1,9 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-import 'onboarding2.dart';
-import 'onboarding3.dart';
+import 'onboarding2.dart'; // Import OnboardingScreen2
+import 'onboarding3.dart'; // Import OnboardingScreen3
 
 class OnboardingScreen1 extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: OnboardingScreen(),
+    );
+  }
+}
+
+class OnboardingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -12,7 +22,10 @@ class OnboardingScreen1 extends StatelessWidget {
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
-            colors: [Color(0xFF000000), Color(0xFF55244A)],
+            colors: [
+              Color(0xFFFFFFFF), // Lightest white at top
+              Color(0xFFF8F8F8), // Soft greyish white at bottom
+            ],
           ),
         ),
         child: Column(
@@ -29,115 +42,77 @@ class OnboardingScreen1 extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 22,
                   fontWeight: FontWeight.bold,
-                  color: Colors.white,
+                  color: Colors.black,
                 ),
               ),
             ),
 
             const SizedBox(height: 40),
 
-            // Lottie Animation instead of Image
+            // Integrated Lottie Animation
             Center(
-              child: SizedBox(
-                width: 250,
-                height: 250,
-                child: Lottie.asset(
-                  'assets/people.json',
-                  fit: BoxFit.contain,
-                ),
+              child: Lottie.asset(
+                'assets/animation3.json', // Ensure this file exists in your assets folder
+                width: 300,
+                height: 300,
+                fit: BoxFit.contain,
+                repeat: true,
+                animate: true,
               ),
             ),
 
             const Spacer(),
 
-            // Navigation Dots
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  width: 12,
-                  height: 12,
-                  decoration: const BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: Colors.white, // Active dot
+            // Navigation Buttons
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 30),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  // Skip Button
+                  TextButton(
+                    onPressed: () {
+                      // Skip directly to the last screen (Onboarding3)
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(builder: (context) => OnboardingScreen3()),
+                      );
+                    },
+                    child: const Text(
+                      "Skip",
+                      style: TextStyle(
+                        fontSize: 18,
+                        color: Colors.grey,
+                      ),
+                    ),
                   ),
-                ),
-                const SizedBox(width: 8),
-                Container(
-                  width: 12,
-                  height: 12,
-                  decoration: const BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: Colors.grey, // Inactive dot
-                  ),
-                ),
-                const SizedBox(width: 8),
-                Container(
-                  width: 12,
-                  height: 12,
-                  decoration: const BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: Colors.grey, // Inactive dot
-                  ),
-                ),
-              ],
-            ),
 
-            const SizedBox(height: 20),
-
-            // Skip Button
-            TextButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => OnboardingScreen3()),
-                );
-              },
-              child: const Text(
-                "Skip",
-                style: TextStyle(
-                  fontSize: 16,
-                  color: Colors.white,
-                  decoration: TextDecoration.underline,
-                ),
+                  // Next Button
+                  ElevatedButton(
+                    onPressed: () {
+                      // Navigate to OnboardingScreen2
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => OnboardingScreen2()),
+                      );
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.black, // Button Color
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                    ),
+                    child: const Text(
+                      "Next",
+                      style: TextStyle(fontSize: 18, color: Colors.white),
+                    ),
+                  ),
+                ],
               ),
             ),
-
-            const SizedBox(height: 20),
           ],
         ),
-      ),
-
-      // Left and Right Arrows
-      floatingActionButton: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          // Back Arrow
-          Padding(
-            padding: const EdgeInsets.only(left: 30.0),
-            child: FloatingActionButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              backgroundColor: Colors.white,
-              child: const Icon(Icons.arrow_back, color: Colors.black),
-            ),
-          ),
-          // Next Arrow
-          Padding(
-            padding: const EdgeInsets.only(right: 30.0),
-            child: FloatingActionButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => OnboardingScreen2()),
-                );
-              },
-              backgroundColor: Colors.white,
-              child: const Icon(Icons.arrow_forward, color: Colors.black),
-            ),
-          ),
-        ],
       ),
     );
   }
