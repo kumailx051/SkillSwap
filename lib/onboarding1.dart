@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'onboarding2.dart';
 import 'onboarding3.dart';
 
@@ -7,7 +8,7 @@ class OnboardingScreen1 extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
@@ -17,10 +18,11 @@ class OnboardingScreen1 extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SizedBox(height: 60),
+            const SizedBox(height: 60),
+
             // Top Text
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20.0),
               child: Text(
                 "Find experts with the skills to help you grow",
                 textAlign: TextAlign.center,
@@ -31,16 +33,23 @@ class OnboardingScreen1 extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: 40),
-            // Center Image
+
+            const SizedBox(height: 40),
+
+            // Lottie Animation instead of Image
             Center(
-              child: Image.asset(
-                'assets/onboarding1.png',
+              child: SizedBox(
                 width: 250,
                 height: 250,
+                child: Lottie.asset(
+                  'assets/people.json',
+                  fit: BoxFit.contain,
+                ),
               ),
             ),
-            Spacer(),
+
+            const Spacer(),
+
             // Navigation Dots
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -48,32 +57,34 @@ class OnboardingScreen1 extends StatelessWidget {
                 Container(
                   width: 12,
                   height: 12,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     shape: BoxShape.circle,
                     color: Colors.white, // Active dot
                   ),
                 ),
-                SizedBox(width: 8),
+                const SizedBox(width: 8),
                 Container(
                   width: 12,
                   height: 12,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     shape: BoxShape.circle,
                     color: Colors.grey, // Inactive dot
                   ),
                 ),
-                SizedBox(width: 8),
+                const SizedBox(width: 8),
                 Container(
                   width: 12,
                   height: 12,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     shape: BoxShape.circle,
                     color: Colors.grey, // Inactive dot
                   ),
                 ),
               ],
             ),
-            SizedBox(height: 20),
+
+            const SizedBox(height: 20),
+
             // Skip Button
             TextButton(
               onPressed: () {
@@ -82,7 +93,7 @@ class OnboardingScreen1 extends StatelessWidget {
                   MaterialPageRoute(builder: (context) => OnboardingScreen3()),
                 );
               },
-              child: Text(
+              child: const Text(
                 "Skip",
                 style: TextStyle(
                   fontSize: 16,
@@ -91,10 +102,12 @@ class OnboardingScreen1 extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: 20),
+
+            const SizedBox(height: 20),
           ],
         ),
       ),
+
       // Left and Right Arrows
       floatingActionButton: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -107,7 +120,7 @@ class OnboardingScreen1 extends StatelessWidget {
                 Navigator.pop(context);
               },
               backgroundColor: Colors.white,
-              child: Icon(Icons.arrow_back, color: Colors.black),
+              child: const Icon(Icons.arrow_back, color: Colors.black),
             ),
           ),
           // Next Arrow
@@ -121,7 +134,7 @@ class OnboardingScreen1 extends StatelessWidget {
                 );
               },
               backgroundColor: Colors.white,
-              child: Icon(Icons.arrow_forward, color: Colors.black),
+              child: const Icon(Icons.arrow_forward, color: Colors.black),
             ),
           ),
         ],
