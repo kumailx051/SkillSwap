@@ -12,7 +12,7 @@ class OnboardingScreen3 extends StatelessWidget {
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
-            colors: [Color(0xFF000000), Color(0xFF55244A)],
+            colors: [Color(0xFF000000), Color.fromARGB(255, 0, 0, 0)],
           ),
         ),
         child: Column(

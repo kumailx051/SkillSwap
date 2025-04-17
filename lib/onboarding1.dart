@@ -52,7 +52,7 @@ class OnboardingScreen extends StatelessWidget {
             // Integrated Lottie Animation
             Center(
               child: Lottie.asset(
-                'assets/animation3.json', // Ensure this file exists in your assets folder
+                'assets/animation 3.json', // Ensure this file exists in your assets folder
                 width: 300,
                 height: 300,
                 fit: BoxFit.contain,
