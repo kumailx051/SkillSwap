@@ -7,7 +7,6 @@ class Onboarding0 extends StatefulWidget {
   const Onboarding0({super.key});
 
   @override
-  // ignore: library_private_types_in_public_api
   _OnboardingScreenState createState() => _OnboardingScreenState();
 }
 
@@ -17,6 +16,7 @@ class _OnboardingScreenState extends State<Onboarding0>
   late Animation<double> _logoAnimation;
   late Animation<double> _titleAnimation;
   late Animation<double> _subtitleAnimation;
+  late Animation<double> _dancingTextAnimation;
 
   @override
   void initState() {
@@ -47,12 +47,18 @@ class _OnboardingScreenState extends State<Onboarding0>
       ),
     );
 
+    // Dancing text animation for "Skill Swap"
+    _dancingTextAnimation = Tween<double>(begin: -5, end: 5).animate(
+      CurvedAnimation(
+        parent: _controller,
+        curve: Curves.elasticInOut, // Make it bounce
+      ),
+    );
+
     _controller.forward();
 
-    // Increased time to 5 seconds before navigation
     Future.delayed(const Duration(seconds: 5), () {
       Navigator.pushReplacement(
-        // ignore: use_build_context_synchronously
         context,
         MaterialPageRoute(builder: (context) => OnboardingScreen1()),
       );
@@ -73,28 +79,11 @@ class _OnboardingScreenState extends State<Onboarding0>
       body: Container(
         width: double.infinity,
         height: double.infinity,
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-  colors: [
-
-  Color.fromARGB(255, 0, 0, 0), // Very dark green at top (almost black-green)
-  Color.fromARGB(255, 0, 0, 0), // Dark green in the middle-top
-  Color.fromARGB(255, 0, 0, 0), // Medium-dark green in the middle
-  Color.fromARGB(255, 0, 0, 0), // Medium green at the bottom
-],
-
-
-            stops: [0.0, 0.3, 0.6, 1.0],
-          ),
-        ),
+        color: Colors.black, // ← Only one black color used here
         child: Column(
           children: [
-            // Top space - takes about 15% of the screen
             SizedBox(height: size.height * 0.15),
 
-            // Logo section - takes about 30% of the screen
             SizedBox(
               height: size.height * 0.3,
               child: Center(
@@ -112,33 +101,37 @@ class _OnboardingScreenState extends State<Onboarding0>
               ),
             ),
 
-            // Title section - takes about 15% of the screen
             SizedBox(
               height: size.height * 0.15,
               child: Center(
                 child: FadeTransition(
                   opacity: _titleAnimation,
-                  child: const Text(
-                    "Skill Swap",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 55,
-                      fontWeight: FontWeight.w600,
-                      letterSpacing: 1.2,
-                      height: 1.2,
-                    ),
+                  child: AnimatedBuilder(
+                    animation: _dancingTextAnimation,
+                    builder: (context, child) {
+                      return Transform.translate(
+                        offset: Offset(0, _dancingTextAnimation.value),
+                        child: Text(
+                          "Skill Swap",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 70,
+                            fontWeight: FontWeight.w600,
+                            letterSpacing: 1.2,
+                            height: 1.2,
+                          ),
+                        ),
+                      );
+                    },
                   ),
                 ),
               ),
             ),
 
-            // Spacer - takes remaining space until loader
             const Spacer(),
 
-            // Loader section - at the bottom with some padding
             Padding(
-              padding: EdgeInsets.only(
-                  bottom: size.height * 0.02), // Reduced padding
+              padding: EdgeInsets.only(bottom: size.height * 0.02),
               child: SizedBox(
                 height: 120,
                 width: 500,
