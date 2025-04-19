@@ -15,7 +15,6 @@ class _OnboardingScreenState extends State<Onboarding0>
   late AnimationController _controller;
   late Animation<double> _logoAnimation;
   late Animation<double> _titleAnimation;
-  late Animation<double> _subtitleAnimation;
   late Animation<double> _dancingTextAnimation;
 
   @override
@@ -40,18 +39,10 @@ class _OnboardingScreenState extends State<Onboarding0>
       ),
     );
 
-    _subtitleAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
-      CurvedAnimation(
-        parent: _controller,
-        curve: const Interval(0.5, 0.9, curve: Curves.easeOut),
-      ),
-    );
-
-    // Dancing text animation for "Skill Swap"
     _dancingTextAnimation = Tween<double>(begin: -5, end: 5).animate(
       CurvedAnimation(
         parent: _controller,
-        curve: Curves.elasticInOut, // Make it bounce
+        curve: Curves.elasticInOut,
       ),
     );
 
@@ -79,57 +70,57 @@ class _OnboardingScreenState extends State<Onboarding0>
       body: Container(
         width: double.infinity,
         height: double.infinity,
-        color: Colors.black, // ← Only one black color used here
+        color: Colors.black,
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            SizedBox(height: size.height * 0.15),
+            const SizedBox(height: 1), // Optional top spacing
 
-            SizedBox(
-              height: size.height * 0.3,
+            // Centered Logo + Text
+            Expanded(
               child: Center(
-                child: FadeTransition(
-                  opacity: _logoAnimation,
-                  child: ScaleTransition(
-                    scale: _logoAnimation,
-                    child: Image.asset(
-                      'assets/logo.png',
-                      width: 130,
-                      height: 140,
-                    ),
-                  ),
-                ),
-              ),
-            ),
-
-            SizedBox(
-              height: size.height * 0.15,
-              child: Center(
-                child: FadeTransition(
-                  opacity: _titleAnimation,
-                  child: AnimatedBuilder(
-                    animation: _dancingTextAnimation,
-                    builder: (context, child) {
-                      return Transform.translate(
-                        offset: Offset(0, _dancingTextAnimation.value),
-                        child: Text(
-                          "Skill Swap",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 70,
-                            fontWeight: FontWeight.w600,
-                            letterSpacing: 1.2,
-                            height: 1.2,
-                          ),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    FadeTransition(
+                      opacity: _logoAnimation,
+                      child: ScaleTransition(
+                        scale: _logoAnimation,
+                        child: Image.asset(
+                          'assets/logo.png',
+                          width: 130,
+                          height: 140,
                         ),
-                      );
-                    },
-                  ),
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                    FadeTransition(
+                      opacity: _titleAnimation,
+                      child: AnimatedBuilder(
+                        animation: _dancingTextAnimation,
+                        builder: (context, child) {
+                          return Transform.translate(
+                            offset: Offset(0, _dancingTextAnimation.value),
+                            child: Text(
+                              "Skill Swap",
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 50,
+                                fontWeight: FontWeight.w600,
+                                letterSpacing: 1.2,
+                                height: 1.2,
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),
 
-            const Spacer(),
-
+            // Bottom Lottie Animation
             Padding(
               padding: EdgeInsets.only(bottom: size.height * 0.02),
               child: SizedBox(

@@ -1,0 +1,2 @@
+C:/Users/amina/OneDrive/Desktop/Skill Swap/SkillSwap/android/app/.cxx/Debug/531i5n5y/x86_64/CMakeFiles/edit_cache.dir
+C:/Users/amina/OneDrive/Desktop/Skill Swap/SkillSwap/android/app/.cxx/Debug/531i5n5y/x86_64/CMakeFiles/rebuild_cache.dir

@@ -18,7 +18,7 @@ class _OnboardingScreen1State extends State<OnboardingScreen1> {
   final List<Map<String, String>> onboardingData = [
    
     {
-      "text": "Find the right match in seconds.\nDiscover people who need your skills — and those who have what you need.",
+      "text": "Find the right match.\nDiscover people who need your skills — and those who have what you need.",
       "animation": "assets/animation 2.json",
     },
     {
