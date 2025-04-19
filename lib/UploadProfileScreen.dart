@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
 import 'dart:io';
-import 'dart:typed_data'; // Add this import for Uint8List
+import 'dart:typed_data';
+// Make sure this import is correct - the path should match your file structure
+import 'lookingGood.dart';
 
 class ProfileSetupScreen extends StatefulWidget {
   const ProfileSetupScreen({Key? key}) : super(key: key);
@@ -70,6 +72,47 @@ class _ProfileSetupScreenState extends State<ProfileSetupScreen> {
     }
   }
 
+  // Navigate to the LookingGood screen
+  void _navigateToLookingGood() {
+    // Basic validation
+    if (_usernameController.text.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Please enter a username')),
+      );
+      return;
+    }
+
+    // Debug print to verify navigation is being attempted
+    print("Attempting to navigate to LookingGood screen");
+
+    try {
+      // Get the profile image (either web or mobile)
+      dynamic profileImage = _isWeb ? _webImageBytes : _imageFile;
+
+      // Navigate to the LookingGood screen
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => LookingGood(
+            username: _usernameController.text,
+            occupation: _selectedOccupation,
+            bio: _bioController.text,
+            profileImage: profileImage,
+          ),
+        ),
+      ).then((value) {
+        // This will be called when returning from the LookingGood screen
+        print("Returned from LookingGood screen");
+      });
+    } catch (e) {
+      // Catch any errors during navigation
+      print("Error navigating to LookingGood: $e");
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Navigation error: $e')),
+      );
+    }
+  }
+
   @override
   void dispose() {
     _usernameController.dispose();
@@ -86,13 +129,11 @@ class _ProfileSetupScreenState extends State<ProfileSetupScreen> {
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
             colors: [
-              
-  Color.fromARGB(255, 0, 0, 0), // Very dark green at top (almost black-green)
-  Color.fromARGB(255, 0, 0, 0), // Dark green in the middle-top
-  Color.fromARGB(255, 0, 0, 0), // Medium-dark green in the middle
-  Color.fromARGB(255, 0, 0, 0), // Medium green at the bottom
-], // Dark purple
-            
+              Color.fromARGB(255, 0, 0, 0),
+              Color.fromARGB(255, 0, 0, 0),
+              Color.fromARGB(255, 0, 0, 0),
+              Color.fromARGB(255, 0, 0, 0),
+            ],
           ),
         ),
         child: SafeArea(
@@ -274,16 +315,12 @@ class _ProfileSetupScreenState extends State<ProfileSetupScreen> {
                         ),
                         SizedBox(height: 24),
 
-                        // Save button
+                        // Save button - MODIFIED TO NAVIGATE TO LOOKING GOOD SCREEN
                         SizedBox(
                           width: double.infinity,
                           child: ElevatedButton(
-                            onPressed: () {
-                              // Save profile logic would go here
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(content: Text('Profile saved!')),
-                              );
-                            },
+                            onPressed:
+                                _navigateToLookingGood, // Use the dedicated navigation method
                             style: ElevatedButton.styleFrom(
                               foregroundColor: Colors.black,
                               backgroundColor: Colors.white,
@@ -316,7 +353,7 @@ class _ProfileSetupScreenState extends State<ProfileSetupScreen> {
                 child: Row(
                   children: [
                     Container(
-                      width: MediaQuery.of(context).size.width / 5,
+                      width: MediaQuery.of(context).size.width / 6,
                       height: 5,
                       color: Colors.blue,
                     ),

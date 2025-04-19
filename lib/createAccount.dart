@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'step1.dart';
+import 'welcome_screen.dart';
 
 class CreateAccountScreen extends StatefulWidget {
   const CreateAccountScreen({super.key});
@@ -86,12 +86,11 @@ class _CreateAccountScreenState extends State<CreateAccountScreen>
                   buildTextField("Password",
                       controller: passwordController,
                       isPassword: true,
-                      obscureText: obscurePassword,
-                      onEyeTap: () {
-                        setState(() {
-                          obscurePassword = !obscurePassword;
-                        });
-                      }),
+                      obscureText: obscurePassword, onEyeTap: () {
+                    setState(() {
+                      obscurePassword = !obscurePassword;
+                    });
+                  }),
                   SizedBox(height: 50),
 
                   // Create Button
@@ -102,7 +101,8 @@ class _CreateAccountScreenState extends State<CreateAccountScreen>
                       onTapCancel: () => setState(() => _buttonScale = 1.0),
                       onTap: () {
                         if (_formKey.currentState!.validate()) {
-                          _showLocationPopup(context, nameController.text.trim());
+                          _showLocationPopup(
+                              context, nameController.text.trim());
                         }
                       },
                       child: AnimatedScale(
@@ -191,8 +191,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen>
               if (!RegExp(r'\d').hasMatch(value)) {
                 return 'Must include at least one number';
               }
-              if (!RegExp(r'[!@#$%^&*(),.?":{}|<>]')
-                  .hasMatch(value)) {
+              if (!RegExp(r'[!@#$%^&*(),.?":{}|<>]').hasMatch(value)) {
                 return 'Must include one special character';
               }
             }
@@ -307,8 +306,7 @@ class _AnimatedPopupContentState extends State<_AnimatedPopupContent>
             builder: (context, child) {
               return Transform.translate(
                 offset: Offset(0, -6 * _iconController.value),
-                child: Icon(Icons.location_on,
-                    size: 48, color: Colors.black87),
+                child: Icon(Icons.location_on, size: 48, color: Colors.black87),
               );
             },
           ),
@@ -336,8 +334,7 @@ class _AnimatedPopupContentState extends State<_AnimatedPopupContent>
                   side: BorderSide(color: Colors.black),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12)),
-                  padding:
-                      EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                  padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                 ),
                 onPressed: () {
                   Navigator.pop(context);
@@ -359,8 +356,7 @@ class _AnimatedPopupContentState extends State<_AnimatedPopupContent>
                   side: BorderSide(color: Colors.black),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12)),
-                  padding:
-                      EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
                 ),
                 onPressed: () {
                   Navigator.pop(context);
